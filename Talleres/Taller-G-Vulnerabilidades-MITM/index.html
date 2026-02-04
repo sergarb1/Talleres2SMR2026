@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Taller G: Hash Cracking Lab | Elite SMR</title>
+  <title>Taller G: MITM Network Audit | Elite SMR</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     body { background-color: #020617; color: #f8fafc; }
     .glass-card { background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    .hero-gradient { background: radial-gradient(circle at 50% -20%, #4c1d95 0%, #020617 70%); }
+    .hero-gradient { background: radial-gradient(circle at 50% -20%, #450a0a 0%, #020617 70%); }
     .text-glow { text-shadow: 0 0 15px #22c55e40; }
     .section-title { font-family: 'Outfit', sans-serif; }
     ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: #020617; } ::-webkit-scrollbar-thumb { background: #166534; border-radius: 10px; }
     html { scroll-behavior: smooth; }
   </style>
 </head>
-<body class="font-sans selection:bg-purple-500/30 overflow-x-hidden">
+<body class="font-sans selection:bg-red-500/30 overflow-x-hidden">
     <nav class="fixed top-0 w-full z-50 bg-slate-950/50 backdrop-blur-xl border-b border-white/5 py-4 px-6">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
       <a href="../../index.html" class="flex items-center gap-2 text-green-500 hover:text-green-400 transition-colors group">
@@ -36,9 +36,9 @@
             <div class='w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[10px] font-bold text-gray-500 group-hover/item:text-green-500 group-hover/item:bg-green-500/10 transition-colors'>A</div>
             <span class='text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover/item:text-white'>Fan-Games Engine</span>
           </a>
-          <a href='../Taller-B-Vulnerabilidades-MITM/index.html' class='flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group/item'>
+          <a href='../Taller-B-Hash-Cracking-Lab/index.html' class='flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group/item'>
             <div class='w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[10px] font-bold text-gray-500 group-hover/item:text-green-500 group-hover/item:bg-green-500/10 transition-colors'>B</div>
-            <span class='text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover/item:text-white'>MITM Network Audit</span>
+            <span class='text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover/item:text-white'>Hash Cracking Lab</span>
           </a>
           <a href='../Taller-C-IA-Smart-Learning/index.html' class='flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group/item'>
             <div class='w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[10px] font-bold text-gray-500 group-hover/item:text-green-500 group-hover/item:bg-green-500/10 transition-colors'>C</div>
@@ -56,9 +56,9 @@
             <div class='w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[10px] font-bold text-gray-500 group-hover/item:text-green-500 group-hover/item:bg-green-500/10 transition-colors'>F</div>
             <span class='text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover/item:text-white'>OSINT Intelligence</span>
           </a>
-          <a href='../Taller-G-Hash-Cracking-Lab/index.html' class='flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group/item'>
+          <a href='../Taller-G-Vulnerabilidades-MITM/index.html' class='flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group/item'>
             <div class='w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[10px] font-bold text-gray-500 group-hover/item:text-green-500 group-hover/item:bg-green-500/10 transition-colors'>G</div>
-            <span class='text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover/item:text-white'>Hash Cracking Lab</span>
+            <span class='text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover/item:text-white'>MITM Network Audit</span>
           </a>
         </div>
       </div>
@@ -69,43 +69,43 @@
     <header class="hero-gradient pt-24 pb-8 px-6 text-center">
       <div class="max-w-4xl mx-auto">
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/50 border border-white/10 text-white text-[10px] font-bold uppercase tracking-[0.3em] mb-8">
-          <i data-lucide="key-round" class="w-3.5 h-3.5 text-purple-500"></i> Talleres 2Âº SMR <span class="text-green-500">ELITE</span>
+          <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-red-500"></i> Talleres 2º SMR <span class="text-green-500">ELITE</span>
         </div>
-        <h1 class="font-outfit text-5xl md:text-7xl font-extrabold mb-6 tracking-tighter text-glow text-white uppercase">Hash Cracking Lab</h1>
-        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed text-center">Criptoanálisis práctico: Domina la recuperación de credenciales y la resolución de desafí­os.</p>
+        <h1 class="font-outfit text-5xl md:text-7xl font-extrabold mb-6 tracking-tighter text-glow text-white uppercase">MITM Network Audit</h1>
+        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed text-center">Conviértete en el guardián de la red: Aprende a detectar y analizar vulnerabilidades crí­ticas.</p>
       </div>
     </header>
 
     <main class="max-w-5xl mx-auto w-full px-6 py-6 flex-grow">
       <div class="space-y-6">
-        <section class="glass-card rounded-[2.5rem] p-8 md:p-10 border-purple-500/10 shadow-2xl relative overflow-hidden text-left">
+        <section class="glass-card rounded-[2.5rem] p-8 md:p-10 border-red-500/10 shadow-2xl relative overflow-hidden text-left">
           <div class="flex flex-col md:flex-row gap-6 items-center">
             <div class="flex-1">
-              <h2 class="text-2xl font-bold mb-4 text-purple-400 section-title uppercase flex items-center gap-3"> <i data-lucide="help-circle"></i> ¿De qué va este taller? </h2>
-              <p class="text-gray-300 leading-relaxed text-base text-justify">Este taller se enfoca en el estudio y ejecución de <strong>ataques de fuerza bruta</strong> como método de auditorí­a de credenciales. A través de manuales técnicos, exploraremos las herramientas necesarias para llevar a cabo estos ataques. Además, incluimos una Guía para la plataforma <strong>OverTheWire</strong>, donde aplicaremos estas técnicas en escenarios reales para superar niveles de seguridad y comprender la importancia de las contraseñas robustas.</p>
+              <h2 class="text-2xl font-bold mb-4 text-red-400 section-title uppercase flex items-center gap-3"> <i data-lucide="help-circle"></i> ¿De qué va este taller? </h2>
+              <p class="text-gray-300 leading-relaxed text-base text-justify">Este taller se centra en la identificación y clasificación de los distintos tipos de vulnerabilidades que afectan a los sistemas informáticos actuales. A través de la Documentación técnica de la unidad de auditorí­a, exploraremos cómo diagnosticar debilidades en la red y entender los vectores de ataque que permiten interceptar información. Es un estudio fundamental para comprender los riesgos reales en entornos locales y establecer las bases para una defensa robusta.</p>
             </div>
             <div class="w-full md:w-1/4 flex justify-center">
-              <div class="p-6 bg-purple-500/10 rounded-full border border-purple-500/20"> <i data-lucide="key-round" class="w-16 h-16 text-purple-500"></i> </div>
+              <div class="p-6 bg-red-500/10 rounded-full border border-red-500/20"> <i data-lucide="shield-alert" class="w-16 h-16 text-red-500"></i> </div>
             </div>
           </div>
         </section>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <section class="glass-card rounded-[2.5rem] p-8 border-purple-500/10 text-left">
-            <h2 class="text-xl font-bold mb-4 text-purple-400 section-title uppercase flex items-center gap-3"> <i data-lucide="wrench"></i> ¿Qué necesitamos? </h2>
-            <ul class="space-y-3 text-gray-300 text-sm"><li><i data-lucide='check' class='inline w-4 h-4 mr-2 text-purple-400'></i> <strong>Manual Básico y Especí­fico</strong>.</li><li><i data-lucide='check' class='inline w-4 h-4 mr-2 text-purple-400'></i> Guía: <strong>Fuerza bruta en OverTheWire</strong>.</li><li><i data-lucide='check' class='inline w-4 h-4 mr-2 text-purple-400'></i> Entorno de pruebas de seguridad.</li></ul>
+          <section class="glass-card rounded-[2.5rem] p-8 border-red-500/10 text-left">
+            <h2 class="text-xl font-bold mb-4 text-red-400 section-title uppercase flex items-center gap-3"> <i data-lucide="wrench"></i> ¿Qué necesitamos? </h2>
+            <ul class="space-y-3 text-gray-300 text-sm"><li><i data-lucide='check' class='inline w-4 h-4 mr-2 text-red-400'></i> Documento: <strong>Tipos de Vulnerabilidades</strong>.</li><li><i data-lucide='check' class='inline w-4 h-4 mr-2 text-red-400'></i> Presentación del Proyecto de auditorí­a.</li><li><i data-lucide='check' class='inline w-4 h-4 mr-2 text-red-400'></i> Capacidad de análisis crí­tico de sistemas.</li></ul>
           </section>
-          <section class="glass-card rounded-[2.5rem] p-8 border-purple-500/10 text-left">
-            <h2 class="text-xl font-bold mb-4 text-purple-400 section-title uppercase flex items-center gap-3"> <i data-lucide="graduation-cap"></i> ¿Qué aprenderemos? </h2>
-            <ul class="space-y-3 text-gray-300 text-sm"><li><i data-lucide='check' class='inline w-4 h-4 mr-2 text-purple-400'></i> Ejecución de <strong>ataques de fuerza bruta</strong>.</li><li><i data-lucide='check' class='inline w-4 h-4 mr-2 text-purple-400'></i> Resolución de retos en <strong>OverTheWire</strong>.</li><li><i data-lucide='check' class='inline w-4 h-4 mr-2 text-purple-400'></i> Configuración de parámetros de ataque.</li></ul>
+          <section class="glass-card rounded-[2.5rem] p-8 border-red-500/10 text-left">
+            <h2 class="text-xl font-bold mb-4 text-red-400 section-title uppercase flex items-center gap-3"> <i data-lucide="graduation-cap"></i> ¿Qué aprenderemos? </h2>
+            <ul class="space-y-3 text-gray-300 text-sm"><li><i data-lucide='check' class='inline w-4 h-4 mr-2 text-red-400'></i> Clasificación técnica de <strong>vulnerabilidades</strong>.</li><li><i data-lucide='check' class='inline w-4 h-4 mr-2 text-red-400'></i> Estructura de un proyecto de <strong>auditorí­a</strong>.</li><li><i data-lucide='check' class='inline w-4 h-4 mr-2 text-red-400'></i> Identificación de vectores de riesgo en red.</li></ul>
           </section>
         </div>
 
-        <section class="glass-card rounded-[2.5rem] p-8 text-center border-purple-500/20">
+        <section class="glass-card rounded-[2.5rem] p-8 text-center border-red-500/20">
           <h2 class="text-2xl font-bold mb-4 font-outfit">Visualizar Material</h2>
-          <p class="text-gray-400 mb-6 max-w-xl mx-auto text-sm">Accede a los manuales técnicos y a la Guía de OverTheWire para este taller.</p>
+          <p class="text-gray-400 mb-6 max-w-xl mx-auto text-sm">Consulta los materiales y recursos didácticos de este taller.</p>
           <div class="flex flex-col items-center gap-4">
-            <a href="#" onclick="showModal(event)" class="inline-flex items-center gap-4 px-10 py-4 bg-purple-600 text-white font-bold rounded-full hover:bg-purple-400 transition-all shadow-xl shadow-purple-500/20 uppercase text-xs tracking-[0.3em] group">
+            <a href="#" onclick="showModal(event)" class="inline-flex items-center gap-4 px-10 py-4 bg-red-600 text-white font-bold rounded-full hover:bg-red-400 transition-all shadow-xl shadow-red-500/20 uppercase text-xs tracking-[0.3em] group">
               <i data-lucide="file-text" class="w-4 h-4 group-hover:scale-110 transition-transform"></i> Acceso al material
             </a>
           </div>

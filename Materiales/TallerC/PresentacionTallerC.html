@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass: LLMs & Gemini CLI</title>
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/black.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+        }
+        .reveal .slides section {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            padding: 1rem !important;
+            box-sizing: border-box !important;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            width: 100%;
+            max-width: 1100px;
+        }
+        .bento-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .bento-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        .highlight-gold { color: #FFD700; }
+        .highlight-green { color: #10B981; }
+        .highlight-red { color: #EF4444; }
+        
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .reveal .slides section {
+                break-inside: avoid !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Portada -->
+            <section class="bg-gradient-to-br from-slate-900 to-indigo-950">
+                <i class="fas fa-brain text-7xl mb-6 text-indigo-400"></i>
+                <h1 class="text-6xl font-extrabold mb-4 tracking-tight">Introducción a <span class="text-indigo-400">LLMs</span> y Gemini</h1>
+                <p class="text-2xl text-slate-300">Desmitificando la IA para el día a día</p>
+                <div class="mt-12 flex gap-4">
+                    <span class="px-4 py-2 bg-indigo-600 rounded-full text-sm font-bold uppercase tracking-wider">Masterclass v2.1</span>
+                </div>
+            </section>
+
+            <!-- Slide 2: Objetivos -->
+            <section>
+                <h2 class="text-4xl font-bold mb-6"><i class="fas fa-bullseye mr-4 text-emerald-400"></i>Objetivos del Taller</h2>
+                <div class="grid grid-cols-2 gap-6 w-full max-w-4xl">
+                    <div class="bento-item flex items-center gap-4">
+                        <i class="fas fa-comments text-3xl text-indigo-400"></i>
+                        <p class="text-left">Aprender a <strong>"dialogar"</strong> eficazmente con la IA.</p>
+                    </div>
+                    <div class="bento-item flex items-center gap-4">
+                        <i class="fas fa-tools text-3xl text-emerald-400"></i>
+                        <p class="text-left">Dominar las herramientas de <strong>Gemini CLI</strong>.</p>
+                    </div>
+                    <div class="bento-item flex items-center gap-4">
+                        <i class="fas fa-graduation-cap text-3xl text-amber-400"></i>
+                        <p class="text-left">Apoyo real en el <strong>estudio académico</strong>.</p>
+                    </div>
+                    <div class="bento-item flex items-center gap-4">
+                        <i class="fas fa-clock text-3xl text-rose-400"></i>
+                        <p class="text-left">Duración estimada: <strong>20 - 30 minutos</strong>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: Conceptos Clave -->
+            <section>
+                <h2 class="text-4xl font-bold mb-6">Conceptos Clave 🏗️</h2>
+                <div class="bento-grid">
+                    <div class="bento-item col-span-2">
+                        <h3 class="text-2xl font-bold mb-4 highlight-gold">¿Qué es un LLM?</h3>
+                        <p class="text-slate-300 text-left">Modelos de lenguaje masivos que procesan y generan texto de forma coherente, actuando como colaboradores creativos y técnicos.</p>
+                    </div>
+                    <div class="bento-item">
+                        <h3 class="text-2xl font-bold mb-4 highlight-green">Prompting</h3>
+                        <p class="text-sm">La clave del éxito: Instrucciones claras + Contexto + Ejemplos.</p>
+                    </div>
+                    <div class="bento-item col-span-3 bg-indigo-900/30">
+                        <p class="text-xl italic">"La IA no adivina lo que quieres; ejecuta lo que pides."</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Requisitos -->
+            <section>
+                <h2 class="text-4xl font-bold mb-10">Kit de Supervivencia 🎒</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl">
+                    <div class="flex items-center gap-4 p-4 border border-slate-700 rounded-xl">
+                        <i class="fab fa-windows text-3xl text-blue-400"></i>
+                        <span>Windows 10+</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 border border-slate-700 rounded-xl">
+                        <i class="fab fa-node-js text-3xl text-green-500"></i>
+                        <span>Node.js v18+</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 border border-slate-700 rounded-xl">
+                        <i class="fas fa-terminal text-3xl text-indigo-400"></i>
+                        <span>Gemini CLI</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 border border-slate-700 rounded-xl">
+                        <i class="fab fa-git-alt text-3xl text-orange-500"></i>
+                        <span>Git configurado</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: Práctica 1 - Instalación -->
+            <section>
+                <h2 class="text-4xl font-bold mb-6">Práctica 1: Puesta en Marcha 🚀</h2>
+                <div class="space-y-4 w-full max-w-2xl text-left">
+                    <div class="bg-black/50 p-4 rounded-lg font-mono text-sm border-l-4 border-indigo-500">
+                        <p class="text-slate-500 mb-2">// Instalar Gemini CLI</p>
+                        <p class="text-indigo-300">npm install -g @google/gemini-cli</p>
+                    </div>
+                    <div class="bg-black/50 p-4 rounded-lg font-mono text-sm border-l-4 border-emerald-500">
+                        <p class="text-slate-500 mb-2">// Verificar instalación</p>
+                        <p class="text-emerald-300">gemini --version</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: Agentes de IA -->
+            <section>
+                <h2 class="text-4xl font-bold mb-8">¿Qué es un Agente? 🤖</h2>
+                <div class="bento-item max-w-2xl">
+                    <p class="mb-4">Es una IA con <strong>instrucciones específicas</strong> (prompts) para realizar una tarea concreta.</p>
+                    <div class="flex gap-4 justify-center mt-6">
+                        <span class="px-3 py-1 bg-slate-700 rounded text-xs">Audio Producer</span>
+                        <span class="px-3 py-1 bg-slate-700 rounded text-xs">System Config</span>
+                        <span class="px-3 py-1 bg-slate-700 rounded text-xs">Visual Artist</span>
+                    </div>
+                </div>
+                <div class="mt-8 text-sm text-slate-400">
+                    <i class="fas fa-info-circle mr-2"></i> No se entrena el modelo, se define su comportamiento.
+                </div>
+            </section>
+
+            <!-- Slide 7: Comandos del Agente -->
+            <section>
+                <h2 class="text-4xl font-bold mb-10">Operando el Agente ⚙️</h2>
+                <div class="grid grid-cols-1 gap-4 w-full max-w-3xl">
+                    <div class="p-4 bg-slate-800 rounded-lg flex justify-between items-center">
+                        <span>1. Inicializar</span>
+                        <code class="text-indigo-400">gemini agent init .\agente.md</code>
+                    </div>
+                    <div class="p-4 bg-slate-800 rounded-lg flex justify-between items-center">
+                        <span>2. Ver Tareas</span>
+                        <code class="text-emerald-400">gemini agent list-tasks</code>
+                    </div>
+                    <div class="p-4 bg-slate-800 rounded-lg flex justify-between items-center">
+                        <span>3. Ejecutar</span>
+                        <code class="text-amber-400">gemini agent run [tarea]</code>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Prompting: El Arte de Pedir -->
+            <section>
+                <h2 class="text-4xl font-bold mb-10">Práctica 2: El Arte del Prompt 🎨</h2>
+                <div class="grid grid-cols-2 gap-8 w-full">
+                    <div class="p-6 border-2 border-rose-500/30 rounded-2xl bg-rose-500/5">
+                        <h3 class="text-xl font-bold mb-4 highlight-red"><i class="fas fa-times-circle mr-2"></i>Prompt Malo</h3>
+                        <p class="italic text-slate-400 text-sm">"Explícame programación."</p>
+                        <ul class="text-xs text-left mt-4 space-y-2 opacity-60">
+                            <li>❌ Vago</li>
+                            <li>❌ Sin contexto</li>
+                            <li>❌ Resultado genérico</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 border-2 border-emerald-500/30 rounded-2xl bg-emerald-500/5">
+                        <h3 class="text-xl font-bold mb-4 highlight-green"><i class="fas fa-check-circle mr-2"></i>Prompt Bueno</h3>
+                        <p class="italic text-slate-200 text-sm">"Explícame programación en Python para principiantes, con ejemplos de fútbol."</p>
+                        <ul class="text-xs text-left mt-4 space-y-2">
+                            <li>✅ Específico</li>
+                            <li>✅ Define público</li>
+                            <li>✅ Usa analogías</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Ponlo en Práctica -->
+            <section>
+                <h2 class="text-4xl font-bold mb-6">Tu Turno ✍️</h2>
+                <div class="bento-item w-full max-w-2xl bg-gradient-to-r from-indigo-900/40 to-emerald-900/40 border-none">
+                    <ol class="text-left space-y-4">
+                        <li>1. Elige un tema que te interese.</li>
+                        <li>2. Escribe un <strong>prompt malo</strong> (vago).</li>
+                        <li>3. Escribe un <strong>prompt bueno</strong> (contexto + detalles).</li>
+                        <li>4. ¡Compara resultados con un compañero!</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Slide 10: Fin -->
+            <section class="text-center">
+                <i class="fas fa-star text-6xl text-amber-400 mb-8 animate-pulse"></i>
+                <h2 class="text-5xl font-bold mb-4">¡Gracias por participar!</h2>
+                <p class="text-slate-400">¿Dudas? Es el momento.</p>
+                <div class="mt-12 text-sm text-indigo-400">
+                    <p>Creado con Gemini CLI + Visual Artist Agent</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Reveal.js & Plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: true,
+            width: 1280,
+            height: 720,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            transition: 'slide',
+            backgroundTransition: 'fade',
+            // Configuración recomendada por Visual Artist
+            plugins: []
+        });
+    </script>
+</body>
+</html>

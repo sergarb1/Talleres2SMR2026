@@ -63,17 +63,17 @@
     .filter-scroll::-webkit-scrollbar { display: none; }
   </style>
 </head>
-<body class="font-sans selection:bg-serra-100">
+<body class="font-sans selection:bg-serra-100 text-justify">
 
   <div class="min-h-screen flex flex-col">
     <!-- Header -->
     <header class="hero-banner py-8 md:py-12 px-6 text-white text-center relative overflow-hidden">
       <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M0 0h40v40H0V0zm1 1h38v38H1V1z\" fill=\"%23ffffff\" fill-opacity=\"1\"/%3E%3C/svg%3E');"></div>
-      <div class="max-w-7xl mx-auto relative z-10 flex flex-col items-center">
+      <div class="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
         <div class="mb-6 p-4 bg-white/10 backdrop-blur-2xl rounded-2xl border border-white/20 shadow-xl">
           <img src="../logo.png" alt="Logo IES Serra Perenxisa" class="h-12 md:h-16 w-auto object-contain">
         </div>
-        <h1 class="font-outfit text-2xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-2 leading-tight uppercase px-4 text-center">
+        <h1 class="font-outfit text-2xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-2 leading-tight uppercase px-4">
           CRÓNICAS <span class="text-serra-200">FORMACIÓN EN EMPRESA</span>
         </h1>
         <h2 class="font-outfit text-sm md:text-2xl font-extralight text-serra-100 tracking-[0.3em] uppercase mb-8 text-center px-4">
@@ -83,13 +83,13 @@
         <div class="w-full overflow-x-auto filter-scroll pb-2">
           <div class="flex justify-start md:justify-center gap-3 min-w-max mx-auto px-4">
             <button onclick="filterNews('all')" id="btn-all" class="filter-btn active px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
-              <i data-lucide="layout-grid" class="w-4 h-4"></i> Todas
+              <i data-lucide="layout-grid" class="w-4 h-4 text-serra-200"></i> Todas
             </button>
             <button onclick="filterNews('informatica')" id="btn-informatica" class="filter-btn px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/10 hover:bg-white/20 flex items-center gap-2 text-white">
-              <i data-lucide="cpu" class="w-4 h-4"></i> Informática
+              <i data-lucide="cpu" class="w-4 h-4 text-serra-200"></i> Alumnado Informática
             </button>
             <button onclick="filterNews('administrativo')" id="btn-administrativo" class="filter-btn px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/10 hover:bg-white/20 flex items-center gap-2 text-white">
-              <i data-lucide="briefcase" class="w-4 h-4"></i> Administrativo
+              <i data-lucide="briefcase" class="w-4 h-4 text-serra-200"></i> Alumnado Administrativo
             </button>
           </div>
         </div>
@@ -97,13 +97,13 @@
     </header>
 
     <main class="main-container px-4 md:px-8 py-12 md:py-16">
-      <div id="news-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 transition-all duration-500">
+      <div id="news-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
         
         <!-- COLUMNA INFORMÁTICA -->
         <div class="space-y-8 news-column" id="col-informatica">
           <div class="flex items-center gap-4 px-4 mb-4">
             <div class="h-px flex-grow bg-serra-200"></div>
-            <span class="text-serra-500 font-black text-xs uppercase tracking-[0.4em]">Informática</span>
+            <span class="text-serra-500 font-black text-xs uppercase tracking-[0.4em]">Alumnado Informática</span>
             <div class="h-px flex-grow bg-serra-200"></div>
           </div>
 
@@ -116,12 +116,12 @@
                 14 de mayo de 2026
               </span>
             </div>
-            <h3 class="font-outfit text-xl md:text-3xl font-black text-serra-900 leading-tight mb-4 uppercase">
+            <h3 class="font-outfit text-lg md:text-2xl font-black text-serra-900 leading-tight mb-2 uppercase">
               <i data-lucide="sparkles" class="inline-icon text-serra-500 mr-2"></i>Nueva Vida al Aula de 2º DAM
             </h3>
-            <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg text-justify font-light">
-              <p class="drop-cap">El aula de 2º DAM ha experimentado una transformación técnica sin precedentes gracias al despliegue intensivo del equipo de Formación en Empresa de Informática <i data-lucide="wrench" class="inline-icon text-serra-500 mx-1"></i>. Tras semanas detectando fatiga en el hardware debida al uso intensivo en tareas de desarrollo, los alumnos tomaron la iniciativa de realizar una intervención de "reingeniería preventiva".</p>
-              <p>El proceso incluyó el desmontaje completo de cada estación, limpieza profunda de refrigeración y la sustitución estratégica de pastas térmicas por compuestos de alta conductividad <i data-lucide="zap" class="inline-icon text-yellow-500 mx-1"></i>. El resultado es un silencio absoluto y una fluidez técnica impecable <i data-lucide="terminal" class="inline-icon text-serra-600 mx-1"></i>.</p>
+            <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg font-light">
+              <p class="drop-cap">Los alumnos de FPB Informática han protagonizado una intervención técnica integral que ha devuelto la máxima operatividad al Aula de 2º DAM <i data-lucide="wrench" class="inline-icon text-serra-500 mx-1"></i>. Tras identificar problemas de rendimiento y sobrecalentamiento, los propios alumnos lideraron un plan de acción para renovar cada puesto de trabajo.</p>
+              <p>Con una dedicación ejemplar, desmontaron cada unidad para realizar limpiezas exhaustivas y optimizar el flujo de aire interno. Sustituyeron pastas térmicas y reorganizaron el cableado con un nivel de detalle profesional <i data-lucide="zap" class="inline-icon text-yellow-500 mx-1"></i>. Gracias a su trabajo, los compañeros de desarrollo disponen ahora de equipos silenciosos y rápidos, asegurando un entorno de aprendizaje óptimo. El éxito de esta "nueva vida" para el aula es mérito exclusivo de la capacidad técnica y el compromiso de nuestros alumnos <i data-lucide="terminal" class="inline-icon text-serra-600 mx-1"></i>.</p>
             </div>
           </article>
 
@@ -134,12 +134,12 @@
                 10 de junio de 2026
               </span>
             </div>
-            <h3 class="font-outfit text-xl md:text-3xl font-black text-serra-900 leading-tight mb-4 uppercase">
-              <i data-lucide="globe" class="inline-icon text-serra-500 mr-2"></i>Compromiso Cero Carbono
+            <h3 class="font-outfit text-lg md:text-2xl font-black text-serra-900 leading-tight mb-2 uppercase">
+              <i data-lucide="globe" class="inline-icon text-serra-500 mr-2"></i>Luchando contra la Huella de Carbono
             </h3>
-            <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg text-justify font-light">
-              <p class="drop-cap">Bajo la filosofía de que "el mejor hardware es el que no se tira", el departamento de Informática ha implementado un plan de reducción de huella de carbono mediante el rescate tecnológico <i data-lucide="recycle" class="inline-icon text-serra-500 mx-1"></i>. Los alumnos han evitado residuos electrónicos recuperando piezas de equipos obsoletos para darles una segunda vida útil.</p>
-              <p>Esta labor ha permitido el ensamblaje de puestos de consulta para la biblioteca utilizando componentes de equipos destinados al desguace <i data-lucide="battery-charging" class="inline-icon text-serra-500 mx-1"></i>. Demostración de que la pericia técnica y la conciencia ecológica van de la mano en el IES Serra Perenxisa <i data-lucide="heart" class="inline-icon text-red-400 mx-1"></i>.</p>
+            <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg font-light text-justify">
+              <p class="drop-cap">Bajo la premisa de la economía circular, los alumnos de FPB Informática han implementado con éxito un plan de rescate de componentes para reducir drásticamente la huella de carbono del centro <i data-lucide="recycle" class="inline-icon text-serra-500 mx-1"></i>. Su iniciativa ha permitido evitar que hardware funcional acabe como residuo electrónico, extendiendo la vida útil de los recursos actuales mediante reparaciones precisas.</p>
+              <p>Gracias a su pericia técnica, han logrado ensamblar nuevos puestos de consulta para la biblioteca utilizando exclusivamente piezas recuperadas de equipos que se consideraban obsoletos <i data-lucide="battery-charging" class="inline-icon text-serra-500 mx-1"></i>. Este esfuerzo no solo representa un ahorro significativo para el instituto, sino que demuestra la conciencia ecológica de nuestros alumnos. Cada equipo revivido es un paso hacia un Serra más sostenible, impulsado por el talento joven y responsable de nuestro alumnado de informática <i data-lucide="heart" class="inline-icon text-red-400 mx-1"></i>.</p>
             </div>
           </article>
         </div>
@@ -148,7 +148,7 @@
         <div class="space-y-8 news-column" id="col-administrativo">
           <div class="flex items-center gap-4 px-4 mb-4">
             <div class="h-px flex-grow bg-blue-200"></div>
-            <span class="text-blue-500 font-black text-xs uppercase tracking-[0.4em]">Administrativo</span>
+            <span class="text-blue-500 font-black text-xs uppercase tracking-[0.4em]">Alumnado Administrativo</span>
             <div class="h-px flex-grow bg-blue-200"></div>
           </div>
 
@@ -161,12 +161,12 @@
                 25 de marzo de 2026
               </span>
             </div>
-            <h3 class="font-outfit text-xl md:text-3xl font-black text-serra-900 leading-tight mb-4 uppercase">
-              <i data-lucide="library" class="inline-icon text-blue-500 mr-2"></i>Motor en la Feria del Libro
+            <h3 class="font-outfit text-lg md:text-2xl font-black text-serra-900 leading-tight mb-2 uppercase text-left">
+              <i data-lucide="library" class="inline-icon text-blue-500 mr-2"></i>Éxito en la Feria del Libro
             </h3>
-            <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg text-justify font-light">
-              <p class="drop-cap">La Feria del Libro ha brillado gracias a la logística de los alumnos de Formación en Empresa del departamento Administrativo <i data-lucide="settings" class="inline-icon text-blue-500 mx-1"></i>. Gestionaron cientos de volúmenes y un flujo constante de público con una maquinaria organizativa robusta.</p>
-              <p>El equipo implementó un sistema de control de inventario en tiempo real y garantizó fluidez durante todo el evento <i data-lucide="clipboard-list" class="inline-icon text-blue-600 mx-1"></i>. Gestionaron ventas y devoluciones con rigor profesional, permitiendo al profesorado centrarse en la mediación lectora. El departamento Administrativo es el corazón operativo de la cultura en nuestro centro <i data-lucide="book-open" class="inline-icon text-blue-500 mx-1"></i>.</p>
+            <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg font-light">
+              <p class="drop-cap">La Feria del Libro del IES Serra Perenxisa ha alcanzado niveles de organización profesional gracias a la colaboración directa de los alumnos de FPB Administrativo <i data-lucide="settings" class="inline-icon text-blue-500 mx-1"></i>. Los alumnos asumieron la responsabilidad de gestionar la compleja logística del evento, desde el control de inventarios hasta la atención personalizada a los visitantes.</p>
+              <p>Con un despliegue de eficacia admirable, implementaron sistemas de registro de stock en tiempo real, asegurando que cada volumen estuviera perfectamente localizado y gestionado <i data-lucide="clipboard-list" class="inline-icon text-blue-600 mx-1"></i>. Su trabajo permitió que la feria funcionara con una fluidez impecable, demostrando que nuestros alumnos poseen las habilidades necesarias para liderar proyectos culturales con un rigor empresarial envidiable. El mérito de esta exitosa edición recae sobre el esfuerzo y la profesionalidad demostrada por el alumnado de administración <i data-lucide="book-open" class="inline-icon text-blue-500 mx-1"></i>.</p>
             </div>
           </article>
 
@@ -179,12 +179,12 @@
                 5 de junio de 2026
               </span>
             </div>
-            <h3 class="font-outfit text-xl md:text-3xl font-black text-serra-900 leading-tight mb-4 uppercase">
-              <i data-lucide="pen-tool" class="inline-icon text-blue-500 mr-2"></i>Orden en la Nueva Agenda
+            <h3 class="font-outfit text-lg md:text-2xl font-black text-serra-900 leading-tight mb-2 uppercase">
+              <i data-lucide="pen-tool" class="inline-icon text-blue-500 mr-2"></i>Preparando la Agenda Escolar
             </h3>
-            <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg text-justify font-light">
-              <p class="drop-cap">La preparación del concurso de la portada de la agenda escolar 2026/27 ha sido un ejercicio maestro de gestión documental por parte del equipo FE Administrativo <i data-lucide="check-circle" class="inline-icon text-blue-500 mx-1"></i>. Diseñaron un proceso de selección democrático y transparente para toda la comunidad.</p>
-              <p>Innovando en la maquetación final, coordinaron la publicación de la imagen ganadora en portada e integraron una galería de propuestas finalistas en el anverso <i data-lucide="layout" class="inline-icon text-blue-600 mx-1"></i>. Esta labor asegura que el talento artístico sea visible, transformando la agenda en un escaparate del arte del Serra <i data-lucide="palette" class="inline-icon text-purple-500 mx-1"></i>.</p>
+            <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg font-light">
+              <p class="drop-cap">Los alumnos de FPB Administrativo han liderado con maestría la organización del concurso para la portada de la agenda escolar 2026/27 <i data-lucide="check-circle" class="inline-icon text-blue-500 mx-1"></i>. Su labor ha sido fundamental para asegurar un proceso transparente y eficiente, gestionando desde la redacción de las bases técnicas hasta la recepción y catalogación de todas las propuestas artísticas del centro.</p>
+              <p>En un gesto de reconocimiento al esfuerzo de sus compañeros, los alumnos han coordinado la publicación de la imagen ganadora en la portada principal y han diseñado un anverso especial que muestra el resto de propuestas destacadas <i data-lucide="layout" class="inline-icon text-blue-600 mx-1"></i>. Esta iniciativa permite que todo el talento del alumnado del Serra tenga visibilidad, fusionando la gestión administrativa con la sensibilidad artística. Un proyecto impecable que destaca la autonomía y el buen hacer de nuestros alumnos de administración <i data-lucide="palette" class="inline-icon text-purple-500 mx-1"></i>.</p>
             </div>
           </article>
         </div>
@@ -194,13 +194,16 @@
     <!-- Footer -->
     <footer class="bg-serra-900 py-12 px-6 text-white border-t-[8px] border-serra-500 mt-auto">
       <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-500">
-        <div class="flex flex-col items-center md:items-start gap-4">
-          <div class="p-2 bg-white rounded-xl">
-            <img src="../logo.png" alt="Logo" class="h-8 w-auto object-contain">
+        <div class="flex flex-col items-center md:items-start gap-4 text-center md:text-left">
+          <div class="p-2 bg-white rounded-xl w-fit">
+            <img src="../logo.png" alt="Logo" class="h-10 md:h-12 w-auto object-contain">
           </div>
           <span class="text-serra-400">IES Serra Perenxisa • 2026</span>
         </div>
-        <span>Crónicas FE • Excelencia Educativa</span>
+        <div class="text-center md:text-right">
+          <p class="mb-1">Crónicas de Formación en Empresa</p>
+          <p class="text-serra-600">Poniendo en valor el esfuerzo del alumnado</p>
+        </div>
       </div>
     </footer>
   </div>
@@ -217,7 +220,6 @@
       const grid = document.getElementById('news-grid');
       const btns = document.querySelectorAll('.filter-btn');
       
-      // Update buttons
       btns.forEach(btn => {
         btn.classList.remove('active');
         btn.classList.add('bg-white/10', 'text-white');
@@ -225,7 +227,6 @@
       document.getElementById('btn-' + category).classList.add('active');
       document.getElementById('btn-' + category).classList.remove('bg-white/10', 'text-white');
 
-      // Filtering logic
       if (category === 'all') {
         grid.classList.remove('lg:grid-cols-1');
         grid.classList.add('lg:grid-cols-2');

@@ -67,18 +67,38 @@
 
   <div class="min-h-screen flex flex-col">
     <!-- Header -->
-    <header class="hero-banner py-8 md:py-12 px-6 text-white text-center relative overflow-hidden">
+    <header class="hero-banner py-8 md:py-12 px-4 md:px-8 text-white text-center relative overflow-hidden">
       <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M0 0h40v40H0V0zm1 1h38v38H1V1z\" fill=\"%23ffffff\" fill-opacity=\"1\"/%3E%3C/svg%3E');"></div>
-      <div class="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
+      <div class="max-w-[1400px] w-full mx-auto relative z-10 flex flex-col items-center text-center">
         <div class="mb-6 p-4 bg-white/10 backdrop-blur-2xl rounded-2xl border border-white/20 shadow-xl">
           <img src="../logo.png" alt="Logo IES Serra Perenxisa" class="h-12 md:h-16 w-auto object-contain">
         </div>
         <h1 class="font-outfit text-2xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-2 leading-tight uppercase px-4">
           CRÓNICAS <span class="text-serra-200">FORMACIÓN EN EMPRESA</span>
         </h1>
-        <h2 class="font-outfit text-sm md:text-2xl font-extralight text-serra-100 tracking-[0.3em] uppercase mb-8 text-center px-4">
+        <h2 class="font-outfit text-sm md:text-2xl font-extralight text-serra-100 tracking-[0.3em] uppercase mb-6 text-center px-4">
           IES SERRA PERENXISA
         </h2>
+        
+        <!-- Mensaje FPB Estrecho y Centrado -->
+        <div class="max-w-4xl mx-auto mb-10 text-left">
+          <div class="relative group">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-serra-500/30 to-serra-200/30 rounded-xl blur opacity-75 transition duration-1000"></div>
+            <div class="relative p-4 rounded-xl bg-white/10 border border-white/20 backdrop-blur-sm shadow-xl">
+              <div class="flex flex-col md:flex-row items-center gap-4">
+                <div class="flex items-center gap-2 text-serra-200 font-bold uppercase tracking-widest text-[10px] whitespace-nowrap">
+                  <i data-lucide="award" class="w-4 h-4"></i> Crónicas de Talento
+                </div>
+                <div class="h-px w-full md:h-8 md:w-px bg-white/20"></div>
+                <p class="text-serra-50 text-[13px] leading-relaxed italic text-left border-l-2 border-serra-500 pl-4 font-light">
+                  <i data-lucide="graduation-cap" class="inline-block w-3.5 h-3.5 text-serra-400 mr-1"></i>
+                  Blog de <strong>Formación en Empresas</strong> del alumnado de <strong>FPB Administrativo y FPB Informática</strong> del <strong>IES Serra Perenxisa</strong>: transformando el aprendizaje en soluciones reales para el mundo profesional.
+                  <i data-lucide="rocket" class="inline-block w-3.5 h-3.5 text-serra-400 ml-1"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
         
         <div class="w-full overflow-x-auto filter-scroll pb-2">
           <div class="flex justify-start md:justify-center gap-3 min-w-max mx-auto px-4">

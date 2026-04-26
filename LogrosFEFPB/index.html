@@ -20,210 +20,241 @@
     }
   </script>
   <style>
-    body { background-color: #f4fbf7; color: #064e3b; }
-    .main-container { max-width: 1280px; margin: 0 auto; }
+    body { background-color: #f4fbf7; color: #064e3b; scroll-behavior: smooth; overflow-x: hidden; }
+    .main-container { max-width: 1400px; margin: 0 auto; }
     .article-card {
       background: white;
-      border-radius: 3rem;
+      border-radius: 2rem;
       border: 1px solid rgba(22, 163, 74, 0.1);
       box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.02);
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      height: fit-content;
     }
     .article-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 40px 60px -15px rgba(22, 163, 74, 0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 30px 50px -10px rgba(0, 0, 0, 0.06);
       border-color: rgba(22, 163, 74, 0.3);
     }
     .drop-cap::first-letter {
       font-family: 'Outfit', sans-serif;
       font-weight: 800;
-      font-size: 5rem;
+      font-size: 3.5rem;
       float: left;
       line-height: 0.8;
-      padding-right: 12px;
+      padding-right: 8px;
       color: #16a34a;
     }
     .hero-banner {
       background: linear-gradient(135deg, #064e3b 0%, #15803d 100%);
     }
-    .footer-logo { filter: brightness(0) invert(1); }
+    .filter-btn {
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      white-space: nowrap;
+    }
+    .filter-btn.active {
+      background: #22c55e;
+      color: #052e16;
+      border-color: #22c55e;
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+    }
+    .hidden-element { display: none !important; }
+    .inline-icon { vertical-align: -0.2em; display: inline-block; width: 1.2em; height: 1.2em; }
+    .filter-scroll::-webkit-scrollbar { display: none; }
   </style>
 </head>
 <body class="font-sans selection:bg-serra-100">
 
   <div class="min-h-screen flex flex-col">
-    <!-- Header Compacto -->
-    <header class="hero-banner py-12 px-6 text-white text-center relative overflow-hidden">
+    <!-- Header -->
+    <header class="hero-banner py-8 md:py-12 px-6 text-white text-center relative overflow-hidden">
       <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M0 0h40v40H0V0zm1 1h38v38H1V1z\" fill=\"%23ffffff\" fill-opacity=\"1\"/%3E%3C/svg%3E');"></div>
       <div class="max-w-7xl mx-auto relative z-10 flex flex-col items-center">
-        <!-- Logo Institucional -->
-        <div class="mb-8 p-4 bg-white/10 backdrop-blur-2xl rounded-2xl border border-white/20 shadow-xl">
-          <img src="../logo.png" alt="Logo IES Serra Perenxisa" class="h-16 w-auto object-contain">
+        <div class="mb-6 p-4 bg-white/10 backdrop-blur-2xl rounded-2xl border border-white/20 shadow-xl">
+          <img src="../logo.png" alt="Logo IES Serra Perenxisa" class="h-12 md:h-16 w-auto object-contain">
         </div>
-        
-        <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-black uppercase tracking-[0.5em] mb-6">
-          <i data-lucide="sparkles" class="w-3 h-3 text-serra-200"></i> Formación en Empresa • Talento Real
-        </div>
-        
-        <h1 class="font-outfit text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-2 leading-tight uppercase">
+        <h1 class="font-outfit text-2xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-2 leading-tight uppercase px-4 text-center">
           CRÓNICAS <span class="text-serra-200">FORMACIÓN EN EMPRESA</span>
         </h1>
-        <h2 class="font-outfit text-xl md:text-2xl font-extralight text-serra-100 tracking-[0.4em] uppercase mb-8 text-center">
+        <h2 class="font-outfit text-sm md:text-2xl font-extralight text-serra-100 tracking-[0.3em] uppercase mb-8 text-center px-4">
           IES SERRA PERENXISA
         </h2>
         
-        <p class="text-serra-50 text-base md:text-lg font-light max-w-5xl mx-auto leading-relaxed italic opacity-90 text-center">
-          El escaparate del compromiso y la excelencia: Descubre cómo nuestros alumnos de FPB transforman el centro.
-        </p>
+        <div class="w-full overflow-x-auto filter-scroll pb-2">
+          <div class="flex justify-start md:justify-center gap-3 min-w-max mx-auto px-4">
+            <button onclick="filterNews('all')" id="btn-all" class="filter-btn active px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
+              <i data-lucide="layout-grid" class="w-4 h-4"></i> Todas
+            </button>
+            <button onclick="filterNews('informatica')" id="btn-informatica" class="filter-btn px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/10 hover:bg-white/20 flex items-center gap-2 text-white">
+              <i data-lucide="cpu" class="w-4 h-4"></i> Informática
+            </button>
+            <button onclick="filterNews('administrativo')" id="btn-administrativo" class="filter-btn px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/10 hover:bg-white/20 flex items-center gap-2 text-white">
+              <i data-lucide="briefcase" class="w-4 h-4"></i> Administrativo
+            </button>
+          </div>
+        </div>
       </div>
     </header>
 
-    <main class="main-container px-6 py-24 space-y-40">
+    <main class="main-container px-4 md:px-8 py-12 md:py-16">
+      <div id="news-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 transition-all duration-500">
+        
+        <!-- COLUMNA INFORMÁTICA -->
+        <div class="space-y-8 news-column" id="col-informatica">
+          <div class="flex items-center gap-4 px-4 mb-4">
+            <div class="h-px flex-grow bg-serra-200"></div>
+            <span class="text-serra-500 font-black text-xs uppercase tracking-[0.4em]">Informática</span>
+            <div class="h-px flex-grow bg-serra-200"></div>
+          </div>
 
-      <!-- SECCIÓN INFORMÁTICA -->
-      <section class="space-y-20">
-        <div class="flex items-center gap-8">
-          <div class="p-4 bg-serra-500 rounded-3xl text-white shadow-lg shadow-serra-500/20">
-            <i data-lucide="cpu" class="w-8 h-8"></i>
-          </div>
-          <div>
-            <h2 class="font-outfit text-2xl font-black text-serra-900 uppercase tracking-[0.4em]">FPB Informática</h2>
-            <p class="text-serra-600 font-bold uppercase text-[10px] tracking-widest mt-1">División de Sistemas y Sostenibilidad</p>
-          </div>
-          <div class="h-[2px] flex-grow bg-gradient-to-r from-serra-200 to-transparent"></div>
-        </div>
-
-        <!-- Noticia Informática 1 -->
-        <article class="article-card p-12 md:p-20">
-          <div class="flex items-center gap-4 mb-12">
-            <span class="px-5 py-2 bg-serra-50 text-serra-600 rounded-xl text-[11px] font-black uppercase tracking-widest border border-serra-100 italic">Mantenimiento de Elite</span>
-            <span class="text-gray-400 text-[11px] font-bold uppercase tracking-widest">Aula 2 DAM • Mayo 2026</span>
-          </div>
-          <h3 class="font-outfit text-4xl md:text-6xl font-black text-serra-900 mb-12 leading-[1.1]">
-            Nueva Vida al Aula de 2º DAM: Cuando el Hardware vuelve a brillar.
-          </h3>
-          <div class="grid grid-cols-1 xl:grid-cols-12 gap-16">
-            <div class="xl:col-span-8 space-y-8 text-gray-700 leading-relaxed text-2xl font-light">
-              <p class="drop-cap">El aula de 2º DAM ha experimentado una transformación radical gracias a la intervención del equipo de FE Informática. Lo que antes era un entorno con equipos fatigados por el uso intensivo, hoy es un centro de alto rendimiento tecnológico.</p>
-              <p>Nuestros alumnos han liderado un proceso exhaustivo de limpieza técnica y reparación, sustituyendo componentes críticos y optimizando la configuración de cada estación. Ya no solo se trata de que las máquinas funcionen; se trata de que los futuros desarrolladores trabajen en un entorno impecable, rápido y profesional. La "nueva vida" de este aula es el resultado directo del esfuerzo y la capacidad técnica de nuestros alumnos de FPB.</p>
-            </div>
-            <div class="xl:col-span-4 bg-serra-50 rounded-[2.5rem] p-10 border border-serra-100 flex flex-col justify-center text-center shadow-inner">
-              <div class="text-serra-500 mb-6 flex justify-center"><i data-lucide="refresh-cw" class="w-16 h-16"></i></div>
-              <h4 class="font-outfit font-black text-serra-900 uppercase text-xs mb-4 tracking-widest">Equipos Reparados</h4>
-              <div class="text-6xl font-black text-serra-600 mb-4">100%</div>
-              <p class="text-gray-500 text-sm leading-loose">Plena operatividad lograda en el aula de desarrollo.</p>
-            </div>
-          </div>
-        </article>
-
-        <!-- Noticia Informática 2 -->
-        <article class="article-card p-12 md:p-20">
-          <div class="flex items-center gap-4 mb-12">
-            <span class="px-5 py-2 bg-green-50 text-green-600 rounded-xl text-[11px] font-black uppercase tracking-widest border border-green-100 italic">Ecológica & Técnica</span>
-            <span class="text-gray-400 text-[11px] font-bold uppercase tracking-widest">Impacto Ambiental • Junio 2026</span>
-          </div>
-          <h3 class="font-outfit text-4xl md:text-6xl font-black text-serra-900 mb-12 leading-[1.1]">
-            Reduciendo la Huella: El compromiso FE con el planeta.
-          </h3>
-          <div class="space-y-8 text-gray-700 leading-relaxed text-2xl font-light max-w-5xl">
-            <p class="drop-cap">El mejor residuo es aquel que no se genera. Bajo esta premisa, el departamento de FPB Informática ha implementado un plan de rescate de componentes que ha reducido drásticamente la huella de carbono del centro.</p>
-            <p>A través de la reparación avanzada y el reaprovechamiento de piezas de equipos destinados al desguace, los alumnos han evitado la compra de hardware nuevo, extendiendo la vida útil de los recursos actuales. Esta labor no solo demuestra una pericia técnica excepcional, sino también una conciencia medioambiental alineada con los valores del IES Serra Perenxisa. Tecnología y ecología se dan la mano en cada equipo recuperado.</p>
-          </div>
-        </article>
-      </section>
-
-      <!-- SECCIÓN ADMINISTRACIÓN -->
-      <section class="space-y-20">
-        <div class="flex items-center gap-8">
-          <div class="p-4 bg-blue-600 rounded-3xl text-white shadow-lg shadow-blue-600/20">
-            <i data-lucide="briefcase" class="w-8 h-8"></i>
-          </div>
-          <div>
-            <h2 class="font-outfit text-2xl font-black text-serra-900 uppercase tracking-[0.4em]">FPB Administrativo</h2>
-            <p class="text-blue-600 font-bold uppercase text-[10px] tracking-widest mt-1">División de Gestión y Logística Cultural</p>
-          </div>
-          <div class="h-[2px] flex-grow bg-gradient-to-r from-blue-200 to-transparent"></div>
-        </div>
-
-        <!-- Noticia Administrativo 1 -->
-        <article class="article-card p-12 md:p-20 border-blue-100">
-          <div class="flex items-center gap-4 mb-12">
-            <span class="px-5 py-2 bg-blue-50 text-blue-600 rounded-xl text-[11px] font-black uppercase tracking-widest border border-blue-100 italic">Coordinación Total</span>
-            <span class="text-gray-400 text-[11px] font-bold uppercase tracking-widest">Feria del Libro • Marzo 2026</span>
-          </div>
-          <h3 class="font-outfit text-4xl md:text-6xl font-black text-serra-900 mb-12 leading-[1.1]">
-            El Corazón de la Feria: Logística y Gestión del FPB Administrativo.
-          </h3>
-          <div class="space-y-8 text-gray-700 leading-relaxed text-2xl font-light max-w-5xl">
-            <p class="drop-cap">La Feria del Libro del IES Serra Perenxisa es un evento complejo que requiere un motor administrativo robusto. Este año, nuestros alumnos de FE Administrativo han sido ese motor, gestionando con éxito cada detalle organizativo.</p>
-            <p>Desde el control de inventarios y la recepción de ejemplares hasta la atención al público y la gestión de ventas, el equipo demostró una capacidad de trabajo bajo presión admirable. Su colaboración ha sido vital para asegurar que la feria fluyera sin contratiempos, permitiendo que la cultura llegara a todos los rincones del centro de forma ordenada y profesional. ¡Eficiencia al servicio de las letras!</p>
-          </div>
-        </article>
-
-        <!-- Noticia Administrativo 2 -->
-        <article class="article-card p-12 md:p-20 border-blue-100">
-          <div class="flex items-center gap-4 mb-12">
-            <span class="px-5 py-2 bg-purple-50 text-purple-600 rounded-xl text-[11px] font-black uppercase tracking-widest border border-purple-100 italic">Diseño & Gestión</span>
-            <span class="text-gray-400 text-[11px] font-bold uppercase tracking-widest">Agenda Escolar • Junio 2026</span>
-          </div>
-          <h3 class="font-outfit text-4xl md:text-6xl font-black text-serra-900 mb-12 leading-[1.1]">
-            Arte y Orden: La Agenda que lo muestra todo.
-          </h3>
-          <div class="grid grid-cols-1 xl:grid-cols-12 gap-16">
-            <div class="xl:col-span-8 space-y-8 text-gray-700 leading-relaxed text-2xl font-light">
-              <p class="drop-cap">Preparar el concurso de la portada de la agenda es un reto que el equipo FE Administrativo ha superado con creatividad y rigor técnico. Han gestionado la recepción de diseños y la selección de la portada ganadora con total transparencia.</p>
-              <p>Pero han ido un paso más allá: en una muestra de reconocimiento al talento del alumnado, han coordinado la publicación no solo de la imagen ganadora, sino también del resto de propuestas destacadas en el anverso de la agenda. Esta labor de diseño y maquetación logística asegura que el esfuerzo de todos los participantes sea visible, fusionando la gestión administrativa con la sensibilidad artística del centro.</p>
-            </div>
-            <div class="xl:col-span-4 flex items-center justify-center">
-              <div class="p-10 bg-purple-50 rounded-[3rem] border border-purple-100 text-center w-full">
-                <div class="text-purple-600 mb-4 flex justify-center"><i data-lucide="palette" class="w-16 h-16"></i></div>
-                <h4 class="font-outfit font-black text-serra-900 uppercase text-[10px] mb-2 tracking-[0.3em]">Gestión Visual</h4>
-                <div class="text-5xl font-black text-purple-500">Multidiseño</div>
-                <p class="text-gray-500 text-xs mt-4">Integración de la ganadora y finalistas en la agenda escolar.</p>
+          <article class="article-card p-6 md:p-10 news-item informatica">
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-10 h-10 md:w-12 md:h-12 bg-serra-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-serra-500/20">
+                <i data-lucide="monitor"></i>
               </div>
+              <span class="text-gray-400 text-[9px] font-bold uppercase tracking-widest bg-gray-50 px-3 py-1 rounded-lg border border-gray-100">
+                14 de mayo de 2026
+              </span>
             </div>
-          </div>
-        </article>
-      </section>
+            <h3 class="font-outfit text-xl md:text-3xl font-black text-serra-900 leading-tight mb-4 uppercase">
+              <i data-lucide="sparkles" class="inline-icon text-serra-500 mr-2"></i>Nueva Vida al Aula de 2º DAM
+            </h3>
+            <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg text-justify font-light">
+              <p class="drop-cap">El aula de 2º DAM ha experimentado una transformación técnica sin precedentes gracias al despliegue intensivo del equipo de Formación en Empresa de Informática <i data-lucide="wrench" class="inline-icon text-serra-500 mx-1"></i>. Tras semanas detectando fatiga en el hardware debida al uso intensivo en tareas de desarrollo, los alumnos tomaron la iniciativa de realizar una intervención de "reingeniería preventiva".</p>
+              <p>El proceso incluyó el desmontaje completo de cada estación, limpieza profunda de refrigeración y la sustitución estratégica de pastas térmicas por compuestos de alta conductividad <i data-lucide="zap" class="inline-icon text-yellow-500 mx-1"></i>. El resultado es un silencio absoluto y una fluidez técnica impecable <i data-lucide="terminal" class="inline-icon text-serra-600 mx-1"></i>.</p>
+            </div>
+          </article>
 
-    </main>
-
-    <!-- Footer Institucional -->
-    <footer class="bg-serra-900 py-24 px-6 text-white border-t-[16px] border-serra-500 mt-20">
-      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16">
-        <div class="flex flex-col items-center md:items-start gap-8">
-          <!-- Logo Footer con visibilidad mejorada -->
-          <div class="p-3 bg-white rounded-2xl">
-            <img src="../logo.png" alt="Logo" class="h-16 w-auto object-contain block">
-          </div>
-          <div class="text-center md:text-left">
-            <h4 class="font-outfit font-black uppercase tracking-[0.3em] text-2xl">IES SERRA PERENXISA</h4>
-            <p class="text-serra-400 font-light italic text-base mt-2">Crónicas de Formación en Empresa 2026</p>
-          </div>
+          <article class="article-card p-6 md:p-10 news-item informatica">
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-10 h-10 md:w-12 md:h-12 bg-serra-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-serra-500/20">
+                <i data-lucide="leaf"></i>
+              </div>
+              <span class="text-gray-400 text-[9px] font-bold uppercase tracking-widest bg-gray-50 px-3 py-1 rounded-lg border border-gray-100">
+                10 de junio de 2026
+              </span>
+            </div>
+            <h3 class="font-outfit text-xl md:text-3xl font-black text-serra-900 leading-tight mb-4 uppercase">
+              <i data-lucide="globe" class="inline-icon text-serra-500 mr-2"></i>Compromiso Cero Carbono
+            </h3>
+            <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg text-justify font-light">
+              <p class="drop-cap">Bajo la filosofía de que "el mejor hardware es el que no se tira", el departamento de Informática ha implementado un plan de reducción de huella de carbono mediante el rescate tecnológico <i data-lucide="recycle" class="inline-icon text-serra-500 mx-1"></i>. Los alumnos han evitado residuos electrónicos recuperando piezas de equipos obsoletos para darles una segunda vida útil.</p>
+              <p>Esta labor ha permitido el ensamblaje de puestos de consulta para la biblioteca utilizando componentes de equipos destinados al desguace <i data-lucide="battery-charging" class="inline-icon text-serra-500 mx-1"></i>. Demostración de que la pericia técnica y la conciencia ecológica van de la mano en el IES Serra Perenxisa <i data-lucide="heart" class="inline-icon text-red-400 mx-1"></i>.</p>
+            </div>
+          </article>
         </div>
-        <div class="flex flex-col items-center md:items-end gap-6 border-l md:border-l-white/10 pl-0 md:pl-16">
-          <p class="text-gray-400 text-[10px] font-black uppercase tracking-[0.5em] mb-4">Departamentos FE</p>
-          <div class="flex gap-12">
-            <div class="text-center md:text-right">
-              <span class="text-serra-200 font-black text-sm uppercase block">Informática</span>
-              <span class="text-gray-500 text-[10px] uppercase tracking-widest mt-1">Sistemas & Reciclaje</span>
-            </div>
-            <div class="text-center md:text-right">
-              <span class="text-serra-200 font-black text-sm uppercase block">Administración</span>
-              <span class="text-gray-500 text-[10px] uppercase tracking-widest mt-1">Gestión & Logística Cultural</span>
-            </div>
+
+        <!-- COLUMNA ADMINISTRATIVO -->
+        <div class="space-y-8 news-column" id="col-administrativo">
+          <div class="flex items-center gap-4 px-4 mb-4">
+            <div class="h-px flex-grow bg-blue-200"></div>
+            <span class="text-blue-500 font-black text-xs uppercase tracking-[0.4em]">Administrativo</span>
+            <div class="h-px flex-grow bg-blue-200"></div>
           </div>
+
+          <article class="article-card p-6 md:p-10 news-item administrativo">
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-600/20">
+                <i data-lucide="book-marked"></i>
+              </div>
+              <span class="text-gray-400 text-[9px] font-bold uppercase tracking-widest bg-gray-50 px-3 py-1 rounded-lg border border-gray-100">
+                25 de marzo de 2026
+              </span>
+            </div>
+            <h3 class="font-outfit text-xl md:text-3xl font-black text-serra-900 leading-tight mb-4 uppercase">
+              <i data-lucide="library" class="inline-icon text-blue-500 mr-2"></i>Motor en la Feria del Libro
+            </h3>
+            <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg text-justify font-light">
+              <p class="drop-cap">La Feria del Libro ha brillado gracias a la logística de los alumnos de Formación en Empresa del departamento Administrativo <i data-lucide="settings" class="inline-icon text-blue-500 mx-1"></i>. Gestionaron cientos de volúmenes y un flujo constante de público con una maquinaria organizativa robusta.</p>
+              <p>El equipo implementó un sistema de control de inventario en tiempo real y garantizó fluidez durante todo el evento <i data-lucide="clipboard-list" class="inline-icon text-blue-600 mx-1"></i>. Gestionaron ventas y devoluciones con rigor profesional, permitiendo al profesorado centrarse en la mediación lectora. El departamento Administrativo es el corazón operativo de la cultura en nuestro centro <i data-lucide="book-open" class="inline-icon text-blue-500 mx-1"></i>.</p>
+            </div>
+          </article>
+
+          <article class="article-card p-6 md:p-10 news-item administrativo">
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-600/20">
+                <i data-lucide="palette"></i>
+              </div>
+              <span class="text-gray-400 text-[9px] font-bold uppercase tracking-widest bg-gray-50 px-3 py-1 rounded-lg border border-gray-100">
+                5 de junio de 2026
+              </span>
+            </div>
+            <h3 class="font-outfit text-xl md:text-3xl font-black text-serra-900 leading-tight mb-4 uppercase">
+              <i data-lucide="pen-tool" class="inline-icon text-blue-500 mr-2"></i>Orden en la Nueva Agenda
+            </h3>
+            <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg text-justify font-light">
+              <p class="drop-cap">La preparación del concurso de la portada de la agenda escolar 2026/27 ha sido un ejercicio maestro de gestión documental por parte del equipo FE Administrativo <i data-lucide="check-circle" class="inline-icon text-blue-500 mx-1"></i>. Diseñaron un proceso de selección democrático y transparente para toda la comunidad.</p>
+              <p>Innovando en la maquetación final, coordinaron la publicación de la imagen ganadora en portada e integraron una galería de propuestas finalistas en el anverso <i data-lucide="layout" class="inline-icon text-blue-600 mx-1"></i>. Esta labor asegura que el talento artístico sea visible, transformando la agenda en un escaparate del arte del Serra <i data-lucide="palette" class="inline-icon text-purple-500 mx-1"></i>.</p>
+            </div>
+          </article>
         </div>
       </div>
-      <div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-        <span>© 2026 Elite Support Team</span>
-        <span>Proyectando el futuro profesional del Serra</span>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-serra-900 py-12 px-6 text-white border-t-[8px] border-serra-500 mt-auto">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-500">
+        <div class="flex flex-col items-center md:items-start gap-4">
+          <div class="p-2 bg-white rounded-xl">
+            <img src="../logo.png" alt="Logo" class="h-8 w-auto object-contain">
+          </div>
+          <span class="text-serra-400">IES Serra Perenxisa • 2026</span>
+        </div>
+        <span>Crónicas FE • Excelencia Educativa</span>
       </div>
     </footer>
   </div>
 
   <script>
     lucide.createIcons();
+
+    function filterNews(category) {
+      const items = document.querySelectorAll('.news-item');
+      const columns = {
+        informatica: document.getElementById('col-informatica'),
+        administrativo: document.getElementById('col-administrativo')
+      };
+      const grid = document.getElementById('news-grid');
+      const btns = document.querySelectorAll('.filter-btn');
+      
+      // Update buttons
+      btns.forEach(btn => {
+        btn.classList.remove('active');
+        btn.classList.add('bg-white/10', 'text-white');
+      });
+      document.getElementById('btn-' + category).classList.add('active');
+      document.getElementById('btn-' + category).classList.remove('bg-white/10', 'text-white');
+
+      // Filtering logic
+      if (category === 'all') {
+        grid.classList.remove('lg:grid-cols-1');
+        grid.classList.add('lg:grid-cols-2');
+        columns.informatica.classList.remove('hidden-element');
+        columns.administrativo.classList.remove('hidden-element');
+        items.forEach(item => item.classList.remove('hidden-element'));
+      } else {
+        grid.classList.remove('lg:grid-cols-2');
+        grid.classList.add('lg:grid-cols-1');
+        
+        if (category === 'informatica') {
+          columns.informatica.classList.remove('hidden-element');
+          columns.administrativo.classList.add('hidden-element');
+          items.forEach(item => {
+            if (item.classList.contains('informatica')) item.classList.remove('hidden-element');
+            else item.classList.add('hidden-element');
+          });
+        } else {
+          columns.administrativo.classList.remove('hidden-element');
+          columns.informatica.classList.add('hidden-element');
+          items.forEach(item => {
+            if (item.classList.contains('administrativo')) item.classList.remove('hidden-element');
+            else item.classList.add('hidden-element');
+          });
+        }
+      }
+      
+      lucide.createIcons();
+    }
   </script>
 </body>
 </html>
